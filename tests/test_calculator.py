@@ -1,4 +1,7 @@
-'''My Calculator Test'''
+"""
+This module contains tests for the Calculator class.
+"""
+
 from calculator import Calculator
 
 def test_addition():

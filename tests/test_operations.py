@@ -1,4 +1,7 @@
-'''Testing Operations'''
+"""
+This module contains tests for mathematical operations.
+"""
+
 from decimal import Decimal
 import pytest
 from calculator.calculation import Calculation
