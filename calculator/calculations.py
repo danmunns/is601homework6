@@ -13,7 +13,7 @@ class Calculations:
     said calculations.
     """
     history: List[Calculation] = []
-    
+
     @classmethod
     def add_calculation(cls, calculation: Calculation):
         """Add a new calculation to the history."""
