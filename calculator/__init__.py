@@ -1,3 +1,9 @@
+"""
+This module contains the Calculator class which creates a 
+Calculator instance and provides access to underlying operations
+and functions.
+"""
+
 # Import necessary modules and classes
 from calculator.calculations import Calculations  # Manages history of calculations
 from calculator.operations import add, subtract, multiply, divide  # Arithmetic operations
@@ -7,26 +13,34 @@ from typing import Callable  # For type hinting callable objects
 
 # Definition of the Calculator class
 class Calculator:
+    """
+    Creates Calculator class which allows you to perform basic mathematical
+    operations on 2 numbers and retrieve history of calculations that have
+    been performed.
+    """
     @staticmethod
-    def _perform_operation(a: Decimal, b: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+    def _perform_operation(num_1: Decimal, num_2: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
         """Create and perform a calculation, then return the result."""
-        calculation = Calculation.create(a, b, operation)
+        calculation = Calculation.create(num_1, num_2, operation)
         Calculations.add_calculation(calculation)
         return calculation.perform()
 
     @staticmethod
-    def add(a: Decimal, b: Decimal) -> Decimal:
-        return Calculator._perform_operation(a, b, add)
+    def add(num_1: Decimal, num_2: Decimal) -> Decimal:
+        """Perform add operation, then return the result."""
+        return Calculator._perform_operation(num_1, num_2, add)
 
     @staticmethod
-    def subtract(a: Decimal, b: Decimal) -> Decimal:
-        return Calculator._perform_operation(a, b, subtract)
+    def subtract(num_1: Decimal, num_2: Decimal) -> Decimal:
+        """Perform subtract operation, then return the result."""
+        return Calculator._perform_operation(num_1, num_2, subtract)
 
     @staticmethod
-    def multiply(a: Decimal, b: Decimal) -> Decimal:
-        return Calculator._perform_operation(a, b, multiply)
+    def multiply(num_1: Decimal, num_2: Decimal) -> Decimal:
+        """Perform multiply operation, then return the result."""
+        return Calculator._perform_operation(num_1, num_2, multiply)
 
     @staticmethod
-    def divide(a: Decimal, b: Decimal) -> Decimal:
-        return Calculator._perform_operation(a, b, divide)
-    
+    def divide(num_1: Decimal, num_2: Decimal) -> Decimal:
+        """Perform divide operation, then return the result."""
+        return Calculator._perform_operation(num_1, num_2, divide)
