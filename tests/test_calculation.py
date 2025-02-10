@@ -11,7 +11,7 @@ import pytest
 from calculator.calculation import Calculation
 from calculator.operations import add, subtract, multiply, divide
 
-@pytest.mark.parametrize("a, b, operation, expected", [
+@pytest.mark.parametrize("num_1, num_2, operation, expected", [
     (Decimal('10'), Decimal('5'), add, Decimal('15')),  # Test addition
     (Decimal('10'), Decimal('5'), subtract, Decimal('5')),  # Test subtraction
     (Decimal('10'), Decimal('5'), multiply, Decimal('50')),  # Test multiplication
@@ -21,22 +21,22 @@ from calculator.operations import add, subtract, multiply, divide
     (Decimal('10.5'), Decimal('2'), multiply, Decimal('21.0')),  # Test multiplication with decimals
     (Decimal('10'), Decimal('0.5'), divide, Decimal('20')),  # Test division with decimals
 ])
-def test_calculation_operations(a, b, operation, expected):
+def test_calculation_operations(num_1, num_2, operation, expected):
     """
     Test calculation operations with various scenarios.
     
     This test ensures that the Calculation class correctly performs the arithmetic operation
-    (specified by the 'operation' parameter) on two Decimal operands ('a' and 'b'),
+    (specified by the 'operation' parameter) on two Decimal operands ('num_1' and 'num_2'),
     and that the result matches the expected outcome.
     
     Parameters:
-        a (Decimal): The first operand in the calculation.
+        num_1 (Decimal): The first operand in the calculation.
         b (Decimal): The second operand in the calculation.
         operation (function): The arithmetic operation to perform.
         expected (Decimal): The expected result of the operation.
     """
-    calc = Calculation(a, b, operation)
-    assert calc.perform() == expected, f"Failed {operation.__name__} operation with {a} and {b}"
+    calc = Calculation(num_1, num_2, operation)
+    assert calc.perform() == expected, f"Failed {operation.__name__} operation with {num_1} and {num_2}"
 
 def test_calculation_repr():
     """
@@ -47,7 +47,7 @@ def test_calculation_repr():
     """
     calc = Calculation(Decimal('10'), Decimal('5'), add)
     expected_repr = "Calculation(10, 5, add)"
-    assert calc.__repr__() == expected_repr, "The __repr__ method output does \
+    assert repr(calc) == expected_repr, "The __repr__ method output does \
     not match the expected string."
 
 def test_divide_by_zero():

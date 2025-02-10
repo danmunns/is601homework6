@@ -15,6 +15,9 @@ def setup_calculations():
     Calculations.add_calculation(Calculation(Decimal('10'), Decimal('5'), add))
     Calculations.add_calculation(Calculation(Decimal('20'), Decimal('3'), subtract))
 
+# pylint: disable=redefined-outer-name
+# pylint: disable=unused-argument
+
 def test_add_calculation(setup_calculations):
     """Test adding a calculation to the history."""
     calc = Calculation(Decimal('2'), Decimal('2'), add)
