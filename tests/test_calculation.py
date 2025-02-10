@@ -36,7 +36,8 @@ def test_calculation_operations(num_1, num_2, operation, expected):
         expected (Decimal): The expected result of the operation.
     """
     calc = Calculation(num_1, num_2, operation)
-    assert calc.perform() == expected, f"Failed {operation.__name__} operation with {num_1} and {num_2}"
+    assert calc.perform() == expected, f"Failed {operation.__name__} operation \
+        with {num_1} and {num_2}"
 
 def test_calculation_repr():
     """
@@ -48,7 +49,7 @@ def test_calculation_repr():
     calc = Calculation(Decimal('10'), Decimal('5'), add)
     expected_repr = "Calculation(10, 5, add)"
     assert repr(calc) == expected_repr, "The __repr__ method output does \
-    not match the expected string."
+        not match the expected string."
 
 def test_divide_by_zero():
     """
