@@ -4,12 +4,12 @@ Calculator instance and provides access to underlying operations
 and functions.
 """
 
-# Import necessary modules and classes
+from decimal import Decimal  # For high-precision arithmetic
+from typing import Callable  # For type hinting callable objects
+
 from calculator.calculations import Calculations  # Manages history of calculations
 from calculator.operations import add, subtract, multiply, divide  # Arithmetic operations
 from calculator.calculation import Calculation  # Represents a single calculation
-from decimal import Decimal  # For high-precision arithmetic
-from typing import Callable  # For type hinting callable objects
 
 # Definition of the Calculator class
 class Calculator:
@@ -19,7 +19,8 @@ class Calculator:
     been performed.
     """
     @staticmethod
-    def _perform_operation(num_1: Decimal, num_2: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+    def _perform_operation(num_1: Decimal, num_2: Decimal, operation: \
+                           Callable[[Decimal, Decimal], Decimal]) -> Decimal:
         """Create and perform a calculation, then return the result."""
         calculation = Calculation.create(num_1, num_2, operation)
         Calculations.add_calculation(calculation)
