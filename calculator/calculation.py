@@ -22,7 +22,7 @@ class Calculation:
         self.operation = operation
 
     # Static method to create a new instance of Calculation
-    @staticmethod    
+    @staticmethod
     def create(num_1: Decimal, num_2: Decimal, operation: Callable[[Decimal, Decimal], Decimal]):
         """Create calculation instance and return object."""
         return Calculation(num_1, num_2, operation)
