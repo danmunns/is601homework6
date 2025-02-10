@@ -1,3 +1,11 @@
+"""
+This module contains tests for the calculator operations and Calculation class.
+
+The tests are designed to verify the correctness of basic arithmetic operations
+(addition, subtraction, multiplication, division) implemented in the calculator.operations module,
+as well as the functionality of the Calculation class that encapsulates these operations.
+"""
+
 from decimal import Decimal
 import pytest
 from calculator.calculation import Calculation
@@ -37,8 +45,8 @@ def test_calculation_repr():
     returns a string that accurately represents the state of the Calculation 
     object, including its operands and operation.
     """
-    calc = Calculation(Decimal('10'), Decimal('5'), add)  # Create a Calculation instance for testing.
-    expected_repr = "Calculation(10, 5, add)"  # Define the expected string representation.
+    calc = Calculation(Decimal('10'), Decimal('5'), add)
+    expected_repr = "Calculation(10, 5, add)"
     assert calc.__repr__() == expected_repr, "The __repr__ method output does \
     not match the expected string."
 

@@ -1,3 +1,5 @@
+'''My Calculator Test'''
+
 from decimal import Decimal
 import pytest
 
