@@ -1,15 +1,31 @@
+"""
+This module contains mathematical operations for the calculator.
+"""
+
 from decimal import Decimal
-# Define the functions with type hints
-def add(a: Decimal, b: Decimal) -> Decimal:
-    return a + b
 
-def subtract(a: Decimal, b: Decimal) -> Decimal:
-    return a - b
+def add(num_1: Decimal, num_2: Decimal) -> Decimal:
+    """
+    Addition function
+    """
+    return num_1 + num_2
 
-def multiply(a: Decimal, b: Decimal) -> Decimal:
-    return a * b
+def subtract(num_1: Decimal, num_2: Decimal) -> Decimal:
+    """
+    Subtraction function
+    """
+    return num_1 - num_2
 
-def divide(a: Decimal, b: Decimal) -> Decimal:
-    if b == 0:
+def multiply(num_1: Decimal, num_2: Decimal) -> Decimal:
+    """
+    Multiplication function
+    """
+    return num_1 * num_2
+
+def divide(num_1: Decimal, num_2: Decimal) -> Decimal:
+    """
+    Division function
+    """
+    if num_2 == 0:
         raise ValueError("Cannot divide by zero")
-    return a / b
+    return num_1 / num_2
