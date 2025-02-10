@@ -32,16 +32,20 @@ def test_clear_history(setup_calculations):
 def test_get_latest(setup_calculations):
     """Test getting the latest calculation from the history."""
     latest = Calculations.get_latest()
-    assert latest.a == Decimal('20') and latest.b == Decimal('3'), "Did not get the correct latest calculation"
+    assert latest.a == Decimal('20') and latest.b == Decimal('3'), "Did not get the \
+    correct latest calculation"
 
 def test_find_by_operation(setup_calculations):
     """Test finding calculations in the history by operation type."""
     add_operations = Calculations.find_by_operation("add")
-    assert len(add_operations) == 1, "Did not find the correct number of calculations with add operation"
+    assert len(add_operations) == 1, "Did not find the correct number of calculations \
+    with add operation"
     subtract_operations = Calculations.find_by_operation("subtract")
-    assert len(subtract_operations) == 1, "Did not find the correct number of calculations with subtract operation"
+    assert len(subtract_operations) == 1, "Did not find the correct number of \
+    calculations with subtract operation"
 
 def test_get_latest_with_empty_history():
     """Test getting the latest calculation when the history is empty."""
     Calculations.clear_history()
-    assert Calculations.get_latest() is None, "Expected None for latest calculation with empty history"
+    assert Calculations.get_latest() is None, "Expected None for latest calculation \
+    with empty history"
