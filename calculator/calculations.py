@@ -1,11 +1,19 @@
+"""
+This module contains the Calculations class which handles the 
+calculator's history.
+"""
+# pylint: disable=unused-import
 from decimal import Decimal
 from typing import Callable, List
-
 from calculator.calculation import Calculation
 
 class Calculations:
+    """
+    Stores calculations and allows for retrieval and deletion of
+    said calculations.
+    """
     history: List[Calculation] = []
-
+    
     @classmethod
     def add_calculation(cls, calculation: Calculation):
         """Add a new calculation to the history."""
