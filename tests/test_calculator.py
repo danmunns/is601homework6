@@ -3,7 +3,7 @@ This module contains tests for the Calculator class.
 """
 from decimal import Decimal
 from calculator import Calculator
-from test_calculations import setup_calculations
+from tests.test_calculations import setup_calculations
 
 # pylint: disable=redefined-outer-name
 # pylint: disable=unused-argument
@@ -27,4 +27,3 @@ def test_multiply():
 def test_get_history(setup_calculations):
     """Test retrieving the entire calculation history."""
     assert len(Calculator.get_history()) == 2
-
