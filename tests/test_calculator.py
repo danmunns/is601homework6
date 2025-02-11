@@ -1,6 +1,7 @@
 """
 This module contains tests for the Calculator class.
 """
+# pylint: disable=unused-import
 from decimal import Decimal
 from calculator import Calculator
 from tests.test_calculations import setup_calculations
