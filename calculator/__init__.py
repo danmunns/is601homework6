@@ -56,6 +56,6 @@ class Calculator:
         return Calculations.get_history()
     
     @staticmethod
-    def clear_history():
+    def clear_history() -> None:
         """Clear history of calculations, then return the result."""
         return Calculations.clear_history()
