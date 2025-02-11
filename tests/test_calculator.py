@@ -28,3 +28,7 @@ def test_multiply():
 def test_get_history(setup_calculations):
     """Test retrieving the entire calculation history."""
     assert len(Calculator.get_history()) == 2
+
+def test_clear_history(setup_calculations):
+    """Test clearing the entire calculation history."""
+    assert len(Calculator.get_history()) == 0
