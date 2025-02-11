@@ -31,4 +31,4 @@ def test_get_history(setup_calculations):
 
 def test_clear_history(setup_calculations):
     """Test clearing the entire calculation history."""
-    assert len(Calculator.get_history()) == 0
+    assert len(Calculator.clear_history()) == 0
