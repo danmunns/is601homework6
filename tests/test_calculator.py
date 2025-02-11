@@ -33,3 +33,8 @@ def test_clear_history(setup_calculations):
     """Test clearing the entire calculation history."""
     Calculator.clear_history()
     assert len(Calculator.get_history()) == 0
+
+def test_get_latest(setup_calculations):
+    """Test retrieving the last calculation."""
+    latest = Calculator.get_latest()
+    assert latest.num_1 == Decimal('20') and latest.num_2 == Decimal('3')
