@@ -2,7 +2,7 @@
 # A list of file extensions of the files that will be checked for Python code
 init-hook='import sys; sys.path.append(".")'
 extension-pkg-whitelist=pydantic
-load-plugins=pylint_django
+load-plugins=
 
 [MESSAGES CONTROL]
 # Only show these errors
@@ -17,7 +17,7 @@ output-format=colorized
 reports=yes
 
 # Put a full report at the end of the file
-report-full=no
+#report-full=no
 
 [DESIGN]
 # Maximum number of parents for a class (see R0901).
