@@ -54,7 +54,7 @@ class Calculator:
     def get_history() -> list[Calculations]:
         """Get history of calculations, then return the result."""
         return Calculations.get_history()
-    
+
     @staticmethod
     def clear_history() -> None:
         """Clear history of calculations, then return the result."""
