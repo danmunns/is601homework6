@@ -62,6 +62,10 @@ class Calculator:
 
     @staticmethod
     def get_latest() -> Calculation:
-        # clear history of calculations
+        """Get latest calculation, then return the result."""
         return Calculations.get_latest()
 
+    @staticmethod
+    def find_by_operation(operation_name: str) -> list[Calculation]:
+        """Get latest calculation by operation type, then return the result."""
+        return Calculations.find_by_operation(operation_name)

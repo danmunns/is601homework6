@@ -38,3 +38,10 @@ def test_get_latest(setup_calculations):
     """Test retrieving the last calculation."""
     latest = Calculator.get_latest()
     assert latest.num_1 == Decimal('20') and latest.num_2 == Decimal('3')
+
+def test_find_by_operation(setup_calculations):
+    """Test retrieving the last calculation by operation type."""
+    add_operations = Calculator.find_by_operation("add")
+    assert len(add_operations) == 1
+    subtract_operations = Calculator.find_by_operation("subtract")
+    assert len(subtract_operations) == 1
