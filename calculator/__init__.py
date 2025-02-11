@@ -18,6 +18,8 @@ class Calculator:
     operations on 2 numbers and retrieve history of calculations that have
     been performed.
     """
+    # Operation Methods
+
     @staticmethod
     def _perform_operation(num_1: Decimal, num_2: Decimal, operation: \
                            Callable[[Decimal, Decimal], Decimal]) -> Decimal:
@@ -45,3 +47,11 @@ class Calculator:
     def divide(num_1: Decimal, num_2: Decimal) -> Decimal:
         """Perform divide operation, then return the result."""
         return Calculator._perform_operation(num_1, num_2, divide)
+
+    # History Methods
+
+    @staticmethod
+    def get_history() -> list[Calculations]:
+        """Get history of calculations, then return the result."""
+        return Calculations.get_history()
+
