@@ -40,7 +40,7 @@ def pytest_addoption(parser):
 
 def pytest_generate_tests(metafunc):
     # Check if the test is expecting any of the dynamically generated fixtures
-    if {"a", "b", "expected"}.intersection(set(metafunc.fixturenames)):
+    if {"num_1", "num_2", "expected"}.intersection(set(metafunc.fixturenames)):
         num_records = metafunc.config.getoption("num_records")
         # Adjust the parameterization to include both operation_name and operation for broad compatibility
         # Ensure 'operation_name' is used for identifying the operation in Calculator class tests
@@ -48,4 +48,4 @@ def pytest_generate_tests(metafunc):
         parameters = list(generate_test_data(num_records))
         # Modify parameters to fit test functions' expectations
         modified_parameters = [(a, b, op_name if 'operation_name' in metafunc.fixturenames else op_func, expected) for a, b, op_name, op_func, expected in parameters]
-        metafunc.parametrize("a,b,operation,expected", modified_parameters)
+        metafunc.parametrize("num_1,num_2,operation,expected", modified_parameters)
