@@ -41,7 +41,7 @@ def main():
     This function checks for number of arguments then runs calculation and print function.
     """
     if len(sys.argv) != 4:
-        print("Usage: python calculator_main.py <number1> <number2> <operation>")
+        print("Usage: python main.py <number1> <number2> <operation>")
         sys.exit(1)
     
     _, a, b, operation = sys.argv
