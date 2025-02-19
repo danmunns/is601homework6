@@ -1,8 +1,17 @@
+#main.py
+
+"""
+This module allows for command-line interface with calculator
+"""
+
 import sys
-from calculator import Calculator
 from decimal import Decimal, InvalidOperation
+from calculator import Calculator
 
 def calculate_and_print(a, b, operation_name):
+    """
+    This function runs user entered calculation and prints results.
+    """
     operation_mappings = {
         'add': Calculator.add,
         'subtract': Calculator.subtract,
@@ -10,6 +19,8 @@ def calculate_and_print(a, b, operation_name):
         'divide': Calculator.divide
     }
 
+    # pylint: disable=line-too-long
+    # pylint: disable=broad-exception-caught
     # Unified error handling for decimal conversion
     try:
         a_decimal, b_decimal = map(Decimal, [a, b])
@@ -26,6 +37,9 @@ def calculate_and_print(a, b, operation_name):
         print(f"An error occurred: {e}")
 
 def main():
+    """
+    This function checks for number of arguments then runs calculation and print function.
+    """
     if len(sys.argv) != 4:
         print("Usage: python calculator_main.py <number1> <number2> <operation>")
         sys.exit(1)

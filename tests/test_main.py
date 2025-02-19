@@ -1,7 +1,7 @@
 #test_main.py
 
 """
-Tests for main.py
+Tests for main.py 
 """
 
 import pytest
@@ -20,7 +20,7 @@ from main import calculate_and_print  # Ensure this import matches your project 
 ])
 def test_calculate_and_print(a_string, b_string, operation_string,expected_string, capsys):
     """
-    Writes tests for test_calculate_and_print function in main and prints to console
+    Tests for calculate and print function in main.py
     """
     calculate_and_print(a_string, b_string, operation_string)
     captured = capsys.readouterr()
