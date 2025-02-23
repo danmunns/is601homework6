@@ -4,9 +4,9 @@
 Tests for main.py 
 """
 
-import pytest
 import sys
 from io import StringIO
+import pytest
 from main import main,calculate_and_print  # Ensure this import matches your project structure
 
 # Parameterize the test function to cover different operations and scenarios, including errors
@@ -29,6 +29,9 @@ def test_calculate_and_print(a_string, b_string, operation_string,expected_strin
     assert captured.out.strip() == expected_string
 
 def test_main_correct_usage(monkeypatch, capsys):
+    """
+    Tests main function with correct arguments.
+    """
     # Simulate command-line arguments
     monkeypatch.setattr(sys, 'argv', ['main.py', '10', '5', 'add'])
     main()
@@ -36,6 +39,9 @@ def test_main_correct_usage(monkeypatch, capsys):
     assert "The result of 10 add 5 is equal to 15" in captured.out
 
 def test_main_incorrect_number_of_arguments(monkeypatch, capsys):
+    """
+    Tests main function with incorrect arguments.
+    """
     monkeypatch.setattr(sys, 'argv', ['main.py', '10', '5'])  # Missing argument
     with pytest.raises(SystemExit) as e:  # Expect sys.exit()
         main()
