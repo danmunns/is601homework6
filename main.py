@@ -48,4 +48,4 @@ def main():
     calculate_and_print(a, b, operation)
 
 if __name__ == '__main__':
-    main()
+    main() # pragma: no cover
