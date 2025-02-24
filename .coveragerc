@@ -1,10 +1,3 @@
 [run]
 omit =
-    */sitecustomize.py  # Exclude sitecustomize.py in any directory
-    */dist-packages/*    # Often helpful to exclude installed packages
-    */site-packages/*
-    *__pycache__/*
-    .venv/* # virtual environment
-    .git/* # git directory
-    .mypy_cache/* # mypy cache
-
+    sitecustomize.py  # Exclude sitecustomize.py in any directory
