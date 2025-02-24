@@ -12,22 +12,16 @@ from calculator.calculation import Calculation
 from calculator.operations import add, subtract, multiply, divide
 
 def test_calculation_operations(num_1, num_2, operation, expected):
-    """
-    Test calculation operations with various scenarios.
-    
-    This test ensures that the Calculation class correctly performs the arithmetic operation
-    (specified by the 'operation' parameter) on two Decimal operands ('num_1' and 'num_2'),
-    and that the result matches the expected outcome.
-    
-    Parameters:
-        num_1 (Decimal): The first operand in the calculation.
-        b (Decimal): The second operand in the calculation.
-        operation (function): The arithmetic operation to perform.
-        expected (Decimal): The expected result of the operation.
-    """
-    calc = Calculation(num_1, num_2, operation)
-    assert calc.perform() == expected, f"Failed {operation.__name__} operation \
-        with {num_1} and {num_2}"
+    if isinstance(expected, str):  # Check if expected is an exception message
+        try:
+            calc = Calculation(num_1, num_2, operation)
+            calc.perform()  # Perform the calculation to potentially raise the exception
+        except (ValueError, ZeroDivisionError) as e:
+            assert str(e) == expected, f"Exception message '{str(e)}' does not match expected '{expected}'"
+    else:  # Normal case (no exception)
+        calc = Calculation(num_1, num_2, operation)
+        result = calc.perform()
+        assert result == expected, f"Failed {operation.__name__} operation with {num_1} and {num_2}"
 
 def test_calculation_repr():
     """
@@ -39,7 +33,8 @@ def test_calculation_repr():
     calc = Calculation(Decimal('10'), Decimal('5'), add)
     expected_repr = "Calculation(10, 5, add)"
     assert repr(calc) == expected_repr, "The __repr__ method output does \
-        not match the expected string."
+        not match the expected string."    
+
 
 def test_divide_by_zero():
     """

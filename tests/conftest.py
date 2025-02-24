@@ -26,24 +26,16 @@ def generate_test_data(num_records):
 
     # Generate test data
     for _ in range(num_records):
-        a = Decimal(fake.random_number(digits=2))
-        b = Decimal(fake.random_number(digits=2)) if _ % 4 != 3 else \
-            Decimal(fake.random_number(digits=1))
+        a = Decimal(fake.random_int(min=0, max=15))
+        b = Decimal(fake.random_int(min=0, max=15)) if _ % 10 != 3 else \
+            Decimal(fake.random_int(min=0, max=0))
         operation_name = fake.random_element(elements=list(operation_mappings.keys()))
         operation_func = operation_mappings[operation_name]
 
-        # Ensure b is not zero for divide operation to prevent division by
-        # zero in expected calculation
-        if operation_func == divide:
-            b = Decimal('1') if b == Decimal('0') else b
-
         try:
-            if operation_func == divide and b == Decimal('0'):
-                expected = "ZeroDivisionError"
-            else:
-                expected = operation_func(a, b)
-        except ZeroDivisionError:
-            expected = "ZeroDivisionError"
+            expected = operation_func(a, b)  # Calculate expected result first
+        except (ZeroDivisionError, ValueError) as e:
+            expected = str(e) # Store the exception message
 
         yield a, b, operation_name, operation_func, expected
 
