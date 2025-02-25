@@ -32,7 +32,7 @@ def calculate_and_print(a, b, operation_name):
     except InvalidOperation:
         print(f"Invalid number input: {a} or {b} is not a valid number.")
     except ZeroDivisionError:
-        print("Error: Division by zero.")
+        print("An error occurred: Cannot divide by zero")
     except Exception as e: # Catch-all for unexpected errors
         print(f"An error occurred: {e}")
 
@@ -41,7 +41,7 @@ def main():
     This function checks for number of arguments then runs calculation and print function.
     """
     if len(sys.argv) != 4:
-        print("Usage: python calculator_main.py <number1> <number2> <operation>")
+        print("Usage: python main.py <number1> <number2> <operation>")
         sys.exit(1)
     
     _, a, b, operation = sys.argv

@@ -4,8 +4,14 @@
 Tests for main.py 
 """
 
+import unittest
+from unittest.mock import patch
+import sys
+from io import StringIO
 import pytest
-from main import calculate_and_print  # Ensure this import matches your project structure
+from main import main,calculate_and_print  # Ensure this import matches your project structure
+
+print("sys.path:", sys.path)
 
 # Parameterize the test function to cover different operations and scenarios, including errors
 @pytest.mark.parametrize("a_string, b_string, operation_string, expected_string", [
@@ -25,3 +31,59 @@ def test_calculate_and_print(a_string, b_string, operation_string,expected_strin
     calculate_and_print(a_string, b_string, operation_string)
     captured = capsys.readouterr()
     assert captured.out.strip() == expected_string
+
+class TestMain(unittest.TestCase):
+    """
+    Tests for main.py
+    """
+    @patch('sys.argv', ['script_name', '5', '2', 'add'])  # Mock command-line arguments
+    def test_main_add(self):
+        """
+        Test add operation at command line
+        """
+        with patch('sys.stdout', new_callable=StringIO) as stdout:
+            main()
+            self.assertEqual(stdout.getvalue().strip(), "The result of 5 add 2 is equal to 7")
+
+    @patch('sys.argv', ['script_name', '10', '0', 'divide'])
+    def test_main_divide_by_zero(self):
+        """
+        Test divide operation at command line
+        """
+        with patch('sys.stdout', new_callable=StringIO) as stdout:
+            main()
+            self.assertEqual(stdout.getvalue().strip(), "An error occurred: Cannot divide by zero")
+
+    @patch('sys.argv', ['script_name', 'a', '2', 'add'])
+    def test_main_invalid_input(self):
+        """
+        Test invalid number input given at command line.
+        """
+        with patch('sys.stdout', new_callable=StringIO) as stdout:
+            main()
+            self.assertEqual(stdout.getvalue().strip(), \
+                             "Invalid number input: a or 2 is not a valid number.")
+
+    @patch('sys.argv', ['script_name', '5', '2', 'invalid_op'])
+    def test_main_invalid_operation(self):
+        """
+        Test invalid operation input given at command line.
+        """
+        with patch('sys.stdout', new_callable=StringIO) as stdout:
+            main()
+            self.assertEqual(stdout.getvalue().strip(), "Unknown operation: invalid_op")
+
+    @patch('sys.argv', ['script_name', '5', '2'])  # Incorrect number of arguments
+    def test_main_incorrect_arguments(self):
+        """
+       Test for incorrect number of arguments at command line.
+        """
+        with patch('sys.stdout', new_callable=StringIO) as stdout:
+            with self.assertRaises(SystemExit) as context: # Expect sys.exit(1)
+                main()
+            self.assertEqual(context.exception.code, 1) # Check the exit code
+            self.assertIn("Usage: python main.py <number1> <number2> <operation>", \
+                          stdout.getvalue().strip())
+
+if __name__ == '__main__':
+    unittest.main()
