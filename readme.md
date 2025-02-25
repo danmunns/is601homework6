@@ -1,3 +1,3 @@
-# Homework Four
+# Homework Five
 
-## Faker, Generating test data, and adding your package to command line app.
+## Command Pattern and Plugins
