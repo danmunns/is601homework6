@@ -25,9 +25,8 @@ class App:
                     continue  # If item is not a class or unrelated class, just ignore
 
     def start(self):
-        print("Type 'exit' to exit.")
         while True:  # REPL Read, Evaluate, Print, Loop
-            command = input("Enter command (add, subtract, multiply, divide): ").strip()
+            command = input("Enter calculation type (add, subtract, multiply, divide) or 'exit' to exit: ").strip()
             if command == "exit":
                 break
             num_1 = input("Enter first number: ").strip()
