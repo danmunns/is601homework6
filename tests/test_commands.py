@@ -5,10 +5,10 @@ Tests for command classes
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from app.commands.add import AddCommand 
-from app.commands.subtract import SubtractCommand 
-from app.commands.multiply import MultiplyCommand 
-from app.commands.divide import DivideCommand
+from app.plugins.add import AddCommand 
+from app.plugins.subtract import SubtractCommand 
+from app.plugins.multiply import MultiplyCommand 
+from app.plugins.divide import DivideCommand
 from calculator import Calculator
 
 class TestCalculatorCommands(unittest.TestCase):
