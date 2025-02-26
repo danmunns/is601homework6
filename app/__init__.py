@@ -9,14 +9,16 @@ class App:
     def __init__(self): # Constructor
         self.command_handler = CommandHandler()
         self.calculator = Calculator()
+        self.register_commands()
 
-    def start(self):
+    def register_commands(self):
         # Register commands here
         self.command_handler.register_command("add", AddCommand(self.calculator))
         self.command_handler.register_command("subtract", SubtractCommand(self.calculator))
         self.command_handler.register_command("multiply", MultiplyCommand(self.calculator))
         self.command_handler.register_command("divide", DivideCommand(self.calculator))
 
+    def start(self):
         print("Type 'exit' to exit.")
         while True:  # REPL Read, Evaluate, Print, Loop
             command = input("Enter command (add, subtract, multiply, divide): ").strip()

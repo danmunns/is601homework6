@@ -6,84 +6,69 @@ Tests for main.py
 
 import unittest
 from unittest.mock import patch
-import sys
 from io import StringIO
-import pytest
-from main import main,calculate_and_print  # Ensure this import matches your project structure
-
-print("sys.path:", sys.path)
-
-# Parameterize the test function to cover different operations and scenarios, including errors
-@pytest.mark.parametrize("a_string, b_string, operation_string, expected_string", [
-    ("5", "3", 'add', "The result of 5 add 3 is equal to 8"),
-    ("10", "2", 'subtract', "The result of 10 subtract 2 is equal to 8"),
-    ("4", "5", 'multiply', "The result of 4 multiply 5 is equal to 20"),
-    ("20", "4", 'divide', "The result of 20 divide 4 is equal to 5"),
-    ("1", "0", 'divide', "An error occurred: Cannot divide by zero"),
-    ("9", "3", 'unknown', "Unknown operation: unknown"),
-    ("a", "3", 'add', "Invalid number input: a or 3 is not a valid number."),
-    ("5", "b", 'subtract', "Invalid number input: 5 or b is not a valid number.")
-])
-def test_calculate_and_print(a_string, b_string, operation_string,expected_string, capsys):
-    """
-    Tests for calculate and print function in main.py
-    """
-    calculate_and_print(a_string, b_string, operation_string)
-    captured = capsys.readouterr()
-    assert captured.out.strip() == expected_string
+from main import App
 
 class TestMain(unittest.TestCase):
     """
     Tests for main.py
     """
-    @patch('sys.argv', ['script_name', '5', '2', 'add'])  # Mock command-line arguments
-    def test_main_add(self):
-        """
-        Test add operation at command line
-        """
-        with patch('sys.stdout', new_callable=StringIO) as stdout:
-            main()
-            self.assertEqual(stdout.getvalue().strip(), "The result of 5 add 2 is equal to 7")
+    def setUp(self):
+        self.app = App()
 
-    @patch('sys.argv', ['script_name', '10', '0', 'divide'])
-    def test_main_divide_by_zero(self):
+    @patch('builtins.input', side_effect=['add', '5', '3', 'exit'])
+    @patch('builtins.print')
+    def test_main_add(self, mock_print, mock_input):
         """
-        Test divide operation at command line
+        Test add operation via REPL loop
         """
-        with patch('sys.stdout', new_callable=StringIO) as stdout:
-            main()
-            self.assertEqual(stdout.getvalue().strip(), "An error occurred: Cannot divide by zero")
+        self.app.start()
+        mock_print.assert_any_call("The result is: 8")
 
-    @patch('sys.argv', ['script_name', 'a', '2', 'add'])
-    def test_main_invalid_input(self):
+    @patch('builtins.input', side_effect=['subtract', '10', '4', 'exit'])
+    @patch('builtins.print')
+    def test_main_subtract(self, mock_print, mock_input):
         """
-        Test invalid number input given at command line.
+        Test subtract operation via REPL loop
         """
-        with patch('sys.stdout', new_callable=StringIO) as stdout:
-            main()
-            self.assertEqual(stdout.getvalue().strip(), \
-                             "Invalid number input: a or 2 is not a valid number.")
+        self.app.start()
+        mock_print.assert_any_call("The result is: 6")
 
-    @patch('sys.argv', ['script_name', '5', '2', 'invalid_op'])
-    def test_main_invalid_operation(self):
+    @patch('builtins.input', side_effect=['multiply', '2', '3', 'exit'])
+    @patch('builtins.print')
+    def test_main_multiply(self, mock_print, mock_input):
         """
-        Test invalid operation input given at command line.
+        Test multiply operation via REPL loop
         """
-        with patch('sys.stdout', new_callable=StringIO) as stdout:
-            main()
-            self.assertEqual(stdout.getvalue().strip(), "Unknown operation: invalid_op")
+        self.app.start()
+        mock_print.assert_any_call("The result is: 6")
 
-    @patch('sys.argv', ['script_name', '5', '2'])  # Incorrect number of arguments
-    def test_main_incorrect_arguments(self):
+    @patch('builtins.input', side_effect=['divide', '10', '2', 'exit'])
+    @patch('builtins.print')
+    def test_main_divide(self, mock_print, mock_input):
         """
-       Test for incorrect number of arguments at command line.
+        Test divide operation via REPL loop
         """
-        with patch('sys.stdout', new_callable=StringIO) as stdout:
-            with self.assertRaises(SystemExit) as context: # Expect sys.exit(1)
-                main()
-            self.assertEqual(context.exception.code, 1) # Check the exit code
-            self.assertIn("Usage: python main.py <number1> <number2> <operation>", \
-                          stdout.getvalue().strip())
+        self.app.start()
+        mock_print.assert_any_call("The result is: 5")
+
+    @patch('builtins.input', side_effect=['divide', '10', '0', 'exit'])
+    @patch('builtins.print')
+    def test_main_divide_by_zero(self, mock_print, mock_input):
+        """
+        Test divide by zero operation via REPL loop
+        """
+        self.app.start()
+        mock_print.assert_any_call("An error occurred: Cannot divide by zero")
+
+    @patch('builtins.input', side_effect=['unknown', '5', '3', 'exit'])
+    @patch('builtins.print')
+    def test_main_unknown_command(self, mock_print, mock_input):
+        """
+        Test unknown command via REPL loop
+        """
+        self.app.start()
+        mock_print.assert_any_call("No such command: unknown")
 
 if __name__ == '__main__':
     unittest.main()

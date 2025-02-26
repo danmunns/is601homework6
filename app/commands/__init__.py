@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class Command(ABC):
     @abstractmethod
     def execute(self, num_1, num_2):
-        pass
+        pass   # pragma: no cover
 
 class CommandHandler:
     def __init__(self):
