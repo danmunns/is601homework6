@@ -1,3 +1,3 @@
-# Homework Five
+# Homework Six
 
-## Command Pattern and Plugins
+## Devops, Cloud Computing, Environment Variables, Logging, and Continuous Integration
