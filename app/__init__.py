@@ -12,6 +12,10 @@ class App:
     def __init__(self): # Constructor
         os.makedirs('logs', exist_ok=True)
         self.configure_logging()
+        load_dotenv()
+        self.settings = self.load_environment_variables()
+        self.settings.setdefault('ENVIRONMENT', 'PRODUCTION')
+        self.get_environment_variable()
         self.command_handler = CommandHandler()
         self.calculator = Calculator()
         logging.info("Initializing App")
@@ -24,6 +28,15 @@ class App:
         else:
             logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("Logging configured.")
+
+    def load_environment_variables(self):
+        settings = {key: value for key, value in os.environ.items()}
+        logging.info("Environment variables loaded.")
+        return settings
+
+    def get_environment_variable(self, env_var: str = 'ENVIRONMENT'):
+        logging.info(f"Environment set to: {self.settings.get(env_var, None)}")
+        return self.settings.get(env_var, None)
 
     def load_plugins(self):
         logging.info("Loading plugins")
