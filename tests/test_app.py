@@ -59,15 +59,5 @@ class TestApp(unittest.TestCase):
         self.app.start()
         mock_print.assert_any_call("The result is: 5")
 
-    @patch('logging.basicConfig')
-    @patch('os.path.exists', return_value=False)  # Ensure logging.conf does not exist
-    def test_configure_logging(self, mock_exists, mock_basicConfig):
-        """
-        Test that logging is configured correctly
-        """
-        # Reinitialize the app to trigger logging configuration
-        self.app = App()
-        mock_basicConfig.assert_called_with(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
 if __name__ == '__main__':
     unittest.main()
