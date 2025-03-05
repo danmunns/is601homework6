@@ -2,3 +2,9 @@
 disable_warnings = no-data-collected
 omit =
     py_env/*
+
+[report]
+exclude_lines =
+    # Exclude logging statements
+    import logging
+    logging\.
