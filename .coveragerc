@@ -1,3 +1,2 @@
 [run]
 disable_warnings = no-data-collected
-omit = sitecustomize.py  # Exclude sitecustomize.py in any directory
